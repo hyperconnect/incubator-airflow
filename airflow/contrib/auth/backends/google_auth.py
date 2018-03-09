@@ -168,10 +168,7 @@ class GoogleAuthBackend(object):
             models.User.username == username).first()
 
         if not user:
-            user = models.User(
-                username=username,
-                email=email,
-                is_superuser=False)
+            return redirect(url_for('airflow.noaccess'))
 
         session.merge(user)
         session.commit()
